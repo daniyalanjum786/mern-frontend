@@ -1,4 +1,27 @@
+import axios from "axios";
+import { useEffect } from "react";
 function Home() {
+  const fetchUserDetails = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:8080/api/v1/users/profile`,
+        {
+          withCredentials: true, // Axios automatically sends cookies when using withCredentials
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log("User details:", response);
+      console.log("User details:", response.data);
+    } catch (error) {
+      console.error("Error fetching user details:", error);
+    }
+  };
+  useEffect(() => {
+    fetchUserDetails();
+  }, []);
+
   return (
     <>
       <main>
@@ -16,45 +39,7 @@ function Home() {
         <section id="featured-products">
           <div className="container">
             <div className="row">
-              <div className="col-lg-4 mb-3">
-                <div className="card">
-                  <img
-                    src="https://picsum.photos/200"
-                    className="card-img-top"
-                    alt="..."
-                  />
-                  <div className="card-body">
-                    <h5 className="card-title">Card title</h5>
-                    <p className="card-text">
-                      Some quick example text to build on the card title and
-                      make up the bulk of the content.
-                    </p>
-                    <a href="#" className="btn btn-primary">
-                      Go somewhere
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div className="col-lg-4 mb-3">
-                <div className="card">
-                  <img
-                    src="https://picsum.photos/100"
-                    className="card-img-top"
-                    alt="..."
-                  />
-                  <div className="card-body">
-                    <h5 className="card-title">Card title</h5>
-                    <p className="card-text">
-                      Some quick example text to build on the card title and
-                      make up the bulk of the content.
-                    </p>
-                    <a href="#" className="btn btn-primary">
-                      Go somewhere
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div className="col-lg-4 mb-3">
+              <div className="col-lg-4 col-md-6 mb-3">
                 <div className="card">
                   <img
                     src="https://picsum.photos/200"

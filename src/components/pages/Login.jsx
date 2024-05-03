@@ -16,8 +16,18 @@ function Login() {
     e.preventDefault();
     try {
       await axios
-        .post(`${import.meta.env.VITE_BASE_URL}/api/v1/users/login`, inputValue)
+        .post(
+          `${import.meta.env.VITE_BASE_URL}/api/v1/users/login`,
+          inputValue,
+          {
+            withCredentials: true, // Axios automatically sends cookies when using withCredentials
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        )
         .then((response) => {
+          console.log(response);
           if (response.data.success) {
             toast.success(response.data.message, { autoClose: 2000 });
             setTimeout(() => {
