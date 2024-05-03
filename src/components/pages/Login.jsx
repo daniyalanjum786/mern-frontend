@@ -15,25 +15,25 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
-        `${import.meta.env.VITE_BASE_URL}/api/v1/users/login`,
-        inputValue
-      );
+      await axios
+        .post(`${import.meta.env.VITE_BASE_URL}/api/v1/users/login`, inputValue)
+        .then((response) => {
+          if (response.data.success) {
+            toast.success(response.data.message, { autoClose: 2000 });
+            setTimeout(() => {
+              navigate("/");
+            }, 3000);
+          }
+        })
+        .catch((error) => {
+          if (error.response.data.message) {
+            toast.error(error.response.data.message, { autoClose: 2000 });
+          }
+        });
 
-      if (response.data) {
-        console.log(response.data);
-        toast.success("Login Successful", { autoClose: 2000 });
-        setTimeout(() => {
-          navigate("/");
-        }, 3000);
-      } else {
-        toast.error("Login Failed", { autoClose: 2000 });
-      }
-      // Here you can handle further logic based on the response, e.g., redirecting the user, saving the token, etc.
       setInputValue({});
     } catch (error) {
       console.error("Login error:", error.response);
-      // Handle errors here, such as showing an error message to the user
     }
   };
 

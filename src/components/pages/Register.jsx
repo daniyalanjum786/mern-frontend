@@ -15,22 +15,26 @@ function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
-        `${import.meta.env.VITE_BASE_URL}/api/v1/users/create`,
-        inputValue
-      );
-
-      if (response.data) {
-        console.log(response.data);
-        toast.success("Registration Successful", { autoClose: 2000 });
-        setTimeout(() => {
-          navigate("/login");
-        }, 3000);
-      } else {
-        toast.error("Something went wrong! Please try again", {
-          autoClose: 2000,
+      await axios
+        .post(
+          `${import.meta.env.VITE_BASE_URL}/api/v1/users/create`,
+          inputValue
+        )
+        .then((response) => {
+          if (response.data.success) {
+            toast.success(response.data.message, { autoClose: 2000 });
+            setTimeout(() => {
+              navigate("/login");
+            }, 3000);
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          if (error.response.data.message) {
+            toast.error(error.response.data.message, { autoClose: 2000 });
+          }
         });
-      }
+
       setInputValue({});
     } catch (error) {
       console.error("Register error:", error.response);
@@ -48,7 +52,6 @@ function Register() {
                   Full Name
                 </label>
                 <input
-                  required
                   type="text"
                   name="name"
                   id="name"
@@ -62,7 +65,6 @@ function Register() {
                   Email
                 </label>
                 <input
-                  required
                   type="text"
                   name="email"
                   id="email"
@@ -76,7 +78,6 @@ function Register() {
                   Password
                 </label>
                 <input
-                  required
                   type="password"
                   name="password"
                   id="password"
