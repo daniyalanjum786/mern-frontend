@@ -4,8 +4,10 @@ import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { setUserDetails } from "../../store/features/user/userSlice";
+import useDocumentTitle from "../../hooks/useDocumentTitle";
 
 function Login() {
+  useDocumentTitle("Login");
   const [inputValue, setInputValue] = useState({});
   const navigate = useNavigate();
   const dispatch = useDispatch();
