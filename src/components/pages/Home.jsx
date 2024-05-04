@@ -1,27 +1,4 @@
-import axios from "axios";
-import { useEffect } from "react";
 function Home() {
-  const fetchUserDetails = async () => {
-    try {
-      const response = await axios.get(
-        `http://localhost:8080/api/v1/users/profile`,
-        {
-          withCredentials: true, // Axios automatically sends cookies when using withCredentials
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      console.log("User details:", response);
-      console.log("User details:", response.data);
-    } catch (error) {
-      console.error("Error fetching user details:", error);
-    }
-  };
-  useEffect(() => {
-    fetchUserDetails();
-  }, []);
-
   return (
     <>
       <main>

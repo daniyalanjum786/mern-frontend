@@ -1,11 +1,14 @@
 import axios from "axios";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { setUserDetails } from "../../store/features/user/userSlice";
 
 function Login() {
   const [inputValue, setInputValue] = useState({});
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     const name = e.target.name;
@@ -30,6 +33,7 @@ function Login() {
           console.log(response);
           if (response.data.success) {
             toast.success(response.data.message, { autoClose: 2000 });
+            dispatch(setUserDetails(response.data));
             setTimeout(() => {
               navigate("/");
             }, 3000);
