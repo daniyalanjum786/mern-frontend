@@ -1,6 +1,13 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
+// // fetching user data after login.
+// const dispatch = useDispatch();
+// useEffect(() => {
+//   // Fetch user details when the application is loaded
+//   dispatch(fetchUserDetailsAsync());
+// }, [dispatch]);
+
 function Profile() {
   const [userDetails, setUserDetails] = useState({});
   const fetchUserDetails = async () => {

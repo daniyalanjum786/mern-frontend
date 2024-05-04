@@ -1,6 +1,8 @@
 import Product from "../Product";
 import useDocumentTitle from "../../hooks/useDocumentTitle.js";
+
 function Home() {
+  // setting title
   useDocumentTitle("Home");
   return (
     <>

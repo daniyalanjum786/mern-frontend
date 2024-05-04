@@ -32,10 +32,11 @@ function Login() {
           }
         )
         .then((response) => {
-          console.log(response);
           if (response.data.success) {
             toast.success(response.data.message, { autoClose: 2000 });
+            // Dispatch setUserDetails action to update Redux store with user details
             dispatch(setUserDetails(response.data));
+            localStorage.setItem("userData", JSON.stringify(response.data));
             setTimeout(() => {
               navigate("/");
             }, 3000);
