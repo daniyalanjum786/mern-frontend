@@ -1,16 +1,13 @@
 import axios from "axios";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { setUserDetails } from "../../store/features/user/userSlice";
-import useDocumentTitle from "../../hooks/useDocumentTitle";
+import useDocumentTitle from "../hooks/useDocumentTitle";
 
 function Login() {
   useDocumentTitle("Login");
   const [inputValue, setInputValue] = useState({});
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     const name = e.target.name;
@@ -34,9 +31,6 @@ function Login() {
         .then((response) => {
           if (response.data.success) {
             toast.success(response.data.message, { autoClose: 2000 });
-            // Dispatch setUserDetails action to update Redux store with user details
-            dispatch(setUserDetails(response.data));
-            localStorage.setItem("userData", JSON.stringify(response.data));
             setTimeout(() => {
               navigate("/");
             }, 3000);

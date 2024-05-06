@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import useDocumentTitle from "../../hooks/useDocumentTitle";
+import useDocumentTitle from "../hooks/useDocumentTitle";
 
 function Register() {
   useDocumentTitle("Register");

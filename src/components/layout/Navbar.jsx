@@ -1,42 +1,5 @@
-import axios from "axios";
-import { useDispatch } from "react-redux";
-import { Link, NavLink, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
-import { setUserDetails } from "../../store/features/user/userSlice";
+import { Link, NavLink } from "react-router-dom";
 function Navbar() {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const user = window.localStorage.getItem("userData");
-  const userData = JSON.parse(user);
-  const handleLogout = async () => {
-    try {
-      await axios
-        .get(`${import.meta.env.VITE_BASE_URL}/api/v1/users/logout`, {
-          withCredentials: true, // Axios automatically sends cookies when using withCredentials
-          headers: {
-            "Content-Type": "application/json",
-          },
-        })
-        .then((response) => {
-          if (response.data.success) {
-            toast.success(response.data.message, { autoClose: 2000 });
-            // Dispatch setUserDetails action to update Redux store with user details
-            dispatch(setUserDetails(null));
-            window.localStorage.removeItem("userData");
-            setTimeout(() => {
-              navigate("/");
-            }, 3000);
-          }
-        })
-        .catch((error) => {
-          if (error.response.data.message) {
-            toast.error(error.response.data.message, { autoClose: 2000 });
-          }
-        });
-    } catch (error) {
-      console.error("Login error:", error.response);
-    }
-  };
   return (
     <>
       <nav className="navbar shadow sticky-top navbar-expand-lg bg-body-tertiary">
@@ -63,6 +26,11 @@ function Navbar() {
               <li className="nav-item">
                 <NavLink className="nav-link" aria-current="page" to="/">
                   Home
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink className="nav-link" aria-current="page" to="/shop">
+                  Products
                 </NavLink>
               </li>
               <li className="nav-item dropdown">
@@ -108,51 +76,12 @@ function Navbar() {
                 Search
               </button>
               <div className="btn-container d-flex ms-md-3">
-                {userData ? (
-                  <>
-                    <div className="btn-group">
-                      <button
-                        type="button"
-                        className="btn btn-secondary dropdown-toggle"
-                        data-bs-toggle="dropdown"
-                        data-bs-display="static"
-                        aria-expanded="false"
-                      >
-                        Profile
-                      </button>
-                      <ul className="dropdown-menu dropdown-menu-lg-end">
-                        <li>
-                          <button className="dropdown-item" type="button">
-                            Profile
-                          </button>
-                        </li>
-                        <li>
-                          <button className="dropdown-item" type="button">
-                            Another action
-                          </button>
-                        </li>
-                        <li>
-                          <button
-                            className="dropdown-item"
-                            onClick={handleLogout}
-                            type="button"
-                          >
-                            Logout
-                          </button>
-                        </li>
-                      </ul>
-                    </div>
-                  </>
-                ) : (
-                  <>
-                    <Link to="/login" className="btn btn-outline-dark me-2">
-                      Login
-                    </Link>
-                    <Link to="/register" className="btn btn-outline-secondary">
-                      Register
-                    </Link>
-                  </>
-                )}
+                <Link to="/login" className="btn btn-outline-dark me-2">
+                  Login
+                </Link>
+                <Link to="/register" className="btn btn-outline-secondary">
+                  Register
+                </Link>
               </div>
             </form>
           </div>

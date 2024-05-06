@@ -1,5 +1,5 @@
-import Product from "../Product";
-import useDocumentTitle from "../../hooks/useDocumentTitle.js";
+import useDocumentTitle from "../hooks/useDocumentTitle.js";
+import Product from "../components/Product";
 
 function Home() {
   // setting title
