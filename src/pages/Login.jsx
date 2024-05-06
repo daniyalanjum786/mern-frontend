@@ -31,6 +31,7 @@ function Login() {
         .then((response) => {
           if (response.data.success) {
             toast.success(response.data.message, { autoClose: 2000 });
+            window.localStorage.setItem("user", JSON.stringify(response.data)); // saving user details to local storage
             setTimeout(() => {
               navigate("/");
             }, 3000);
