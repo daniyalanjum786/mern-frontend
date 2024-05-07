@@ -1,30 +1,24 @@
 import { Link } from "react-router-dom";
-
-function Product() {
+function Product({ product }) {
   // TODO: for star rating feature 5:11:39
   return (
     <>
-      <div className="row">
-        <div className="col-lg-4 col-md-6 mb-3">
-          <Link className="text-decoration-none">
-            <div className="card">
-              <img
-                src="https://picsum.photos/200"
-                className="card-img-top"
-                alt="..."
-              />
-              <div className="card-body">
-                <h5 className="card-title">Card title</h5>
-                <p className="card-text">
-                  Some quick example text to build on the card title and make up
-                  the bulk of the content.
-                </p>
-                <button className="btn btn-primary">Add to Cart</button>
-              </div>
-            </div>
-          </Link>
+      <Link className="text-decoration-none" to={product._id}>
+        <div className="card">
+          <img
+            src="https://picsum.photos/200"
+            className="card-img-top"
+            alt="..."
+          />
+          <div className="card-body">
+            <h5 className="card-title">{product.name}</h5>
+            <h6>{product.category}</h6>
+            <p className="card-text">{product.description}</p>
+            <p>${product.price}</p>
+            <button className="btn btn-primary">Add to Cart</button>
+          </div>
         </div>
-      </div>
+      </Link>
     </>
   );
 }
