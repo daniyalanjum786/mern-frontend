@@ -7,7 +7,7 @@ import Loading from "../components/Loading.jsx";
 
 function Home() {
   const dispatch = useDispatch();
-  const { products, status, error } = useSelector((state) => state.products);
+  const { products, status } = useSelector((state) => state.products);
   const { productsArr, pageSize, page, total, success } = products;
 
   // setting title

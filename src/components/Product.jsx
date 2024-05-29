@@ -3,7 +3,7 @@ function Product({ product }) {
   // TODO: for star rating feature 5:11:39
   return (
     <>
-      <Link className="text-decoration-none" to={product._id}>
+      <Link className="text-decoration-none" to={`/product/${product._id}`}>
         <div className="card">
           <img
             src="https://picsum.photos/200"
